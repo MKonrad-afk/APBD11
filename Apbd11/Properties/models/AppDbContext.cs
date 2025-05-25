@@ -12,8 +12,17 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Doctor>()
+            .HasKey(d => d.IdDoctor);
+        modelBuilder.Entity<Medicament>()
+            .HasKey(m => m.IdMedicament);
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasKey(pm => new { pm.IdPrescription, pm.IdMedicament });
+        modelBuilder.Entity<Patient>()
+            .HasKey(p => p.IdPatient);
+        modelBuilder.Entity<Prescription>()
+            .HasKey(p => p.IdPrescription);
+
 
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasOne(pm => pm.Medicament)
